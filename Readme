@@ -39,15 +39,27 @@ Requires [Node.js](https://nodejs.org/) (no other dependencies).
 | Windows (CRLF) line endings | Handled correctly |
 
 ## Section 2 — AI-Assisted Programming
+I asked AI to help me design a "fancy" command and to suggest test cases and
+edge cases for it, using prompts like "What are some test cases I should use
+for this command?" and "What edge cases could cause this program to fail?"
+I also asked it for a draft implementation of fancyCat in Node.js and for
+help with the Git commands needed to create the repository.
 
-**What I asked AI:**
-[Write the actual prompts you used, e.g. "What are some test cases I should use for this command?" and "What edge cases could cause this program to fail?"]
+AI gave me a working starting point for the script and suggested the test
+scenarios: a normal file, a longer file to check number alignment, an empty
+file, a missing file, no argument, a directory, and a file with no trailing
+newline. It also pointed out edge cases I probably would not have thought of
+on my own, like the extra blank "line" that appears at the end of every file
+when you split on newlines. It also walked me through the git init / add /
+commit / push steps.
 
-**Where AI helped:**
-[e.g. suggested the edge cases (empty file, directory, missing argument, no trailing newline), drafted the first version of the code, explained Git commands for creating the repo.]
 
-**Where I had to think independently:**
-[e.g. running the tests myself, comparing actual vs. expected output, deciding how output should look, making the code changes after testing, deciding which features to keep.]
+I had to run every test myself, since AI cannot run my code, and compare the
+actual output to the expected output. I also decided how the output should
+look (right-aligned line numbers with a "|" separator and a total at the
+end) and what should happen in each edge case, such as printing "(empty file)"
+instead of nothing.
 
-**What AI got wrong or missed:**
-[Only write what you really observed. Possible examples to check for: the first version split lines only on `\n`, so Windows `\r\n` files left stray `\r` characters (fixed with `split(/\r?\n/)`); it can't run or screenshot code, so all testing had to be done by me. Add anything else you found.]
+The first version split lines only on "\n", so files with Windows-style
+"\r\n" line endings could leave stray "\r" characters in the output. This
+was fixed by splitting with /\r?\n/.
